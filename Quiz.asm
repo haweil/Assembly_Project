@@ -1,11 +1,12 @@
-include emu8086 
+
 .MODEL SMALL
 .STACK 100H
 
 .DATA    
 
 MSG1 DB '                .....WELCOME TO YOUR FIRST QUIZ.....$'
-MSA1 DB 'Student Name: Mohamed Kamal Haweil Sec : 7.$ '
+MSA1 DB '           Student Name: Mohamed Kamal Haweil   Sec : 7.$ ' 
+MSA2 DB '           Student Name: Mahmoud Elsayed Mousa  Sec : 7.$ '
 MSG2 DB 'Rules : $'
 MSG3 DB '*. For Every Correct answer you will get 1 point.$'
 MSG4 DB '*. For Every Wrong answer 1 Point will cut from your total point.$'
@@ -41,19 +42,25 @@ MAIN PROC
     
     MOV AX,@DATA
     MOV DS,AX
-    
+           ; welcome messege ; 
     LEA DX,MSG1
     MOV AH,9
     INT 21H
     
     CALL NL
-           
+            ; student name ;
            
     LEA DX,MSA1
     MOV AH,9
     INT 21H
     
     CALL NL
+                ; student name ;    
+    LEA DX,MSA2
+    MOV AH,9
+    INT 21H
+    
+    CALL NL    
     
     LEA DX,MSG2
     MOV AH,9
@@ -89,13 +96,14 @@ MAIN PROC
     
     QSN1:
     CALL NL
-    
+         ;print Question1;
     LEA DX,Q1
     MOV AH,9
     INT 21H
     
-    CALL NL
+    CALL NL 
     
+          ;Print the question choicesﬂ 
     LEA DX,QA1
     MOV AH,9
     INT 21H
@@ -104,10 +112,11 @@ MAIN PROC
     
     MOV AH, 1
     INT 21H
-    CMP AL, 'a'
-    JE QSN2
-    JNE QSNW2
-    
+    CMP AL, 'a'  ;COMPARE answer = a;
+    JE QSN2      ;if true
+    JNE QSNW2    ; if false
+                      
+                      
     QSN2:
     CALL NL
     
